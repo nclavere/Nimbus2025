@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nimbus2025Test", "Nimbus2025Test\Nimbus2025Test.csproj", "{4BDE52C0-038A-44B0-B5E8-77528B902DE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nimbus2025model", "Nimbus2025model\Nimbus2025model.csproj", "{AD63811B-6F9F-4F18-88D1-B23EFC98E809}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BDE52C0-038A-44B0-B5E8-77528B902DE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BDE52C0-038A-44B0-B5E8-77528B902DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BDE52C0-038A-44B0-B5E8-77528B902DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BDE52C0-038A-44B0-B5E8-77528B902DE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD63811B-6F9F-4F18-88D1-B23EFC98E809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD63811B-6F9F-4F18-88D1-B23EFC98E809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD63811B-6F9F-4F18-88D1-B23EFC98E809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD63811B-6F9F-4F18-88D1-B23EFC98E809}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDB78EA5-FEE8-4DE6-8403-CF33A5CE7C59}
+	EndGlobalSection
+EndGlobal
