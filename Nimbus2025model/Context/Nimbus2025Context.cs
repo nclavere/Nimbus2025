@@ -13,16 +13,16 @@ public class Nimbus2025Context : DbContext
     public DbSet<Passenger> Passengers { get; set; }
     public DbSet<Person> Persons { get; set; }
 
-    //public Nimbus2025Context(DbContextOptions<Nimbus2025Context> options)
-    //    : base(options)
-    //{
-
-    //}
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public Nimbus2025Context(DbContextOptions<Nimbus2025Context> options)
+        : base(options)
     {
-        optionsBuilder.UseSqlServer(
-            @"Server=(localdb)\mssqllocaldb;Database=Nimbus2025;ConnectRetryCount=0");
+
     }
+
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //{
+    //    optionsBuilder.UseSqlServer(
+    //        @"Server=(localdb)\mssqllocaldb;Database=Nimbus2025;ConnectRetryCount=0");
+    //}
 
 }
