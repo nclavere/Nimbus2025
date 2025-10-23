@@ -22,6 +22,8 @@ namespace DemoWPF.Views
     /// </summary>
     public partial class UcAeroports : UserControl
     {
+        private List<AirportDto> _aeroports = new List<AirportDto>();
+
         public UcAeroports()
         {
             InitializeComponent();
@@ -30,14 +32,19 @@ namespace DemoWPF.Views
 
         private async Task LoadAeroportsAsync()
         {
-            var lst = await HttpClientService.Instance.GetAeroports();
-            lstb.ItemsSource = lst;
+            _aeroports = await HttpClientService.Instance.GetAeroports();
+            lstb.ItemsSource = _aeroports;
         }
 
         private void lstb_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var item = (AirportDto)lstb.SelectedItem;
             MessageBox.Show($"Vous avez sélectionné l'aéroport : {item.Name} ({item.Code})", "Aéroport sélectionné", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void filtre_KeyDown(object sender, KeyEventArgs e)
+        {
+            lstb.ItemsSource = _aeroports.Where(a => a.Name.Contains(filtre.Text, StringComparison.InvariantCultureIgnoreCase) ).ToList();
         }
     }
 }
