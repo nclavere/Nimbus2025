@@ -11,7 +11,7 @@ public class Airport
     [StringLength(80)]
     public string Name { get; set; } = null!;
 
-    [StringLength(3)]
+    [StringLength(4)]
     public string Code { get; set; } = null!;
 
     [InverseProperty(nameof(Flight.AirportFrom))]

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nimbus2025model.Context;
 
@@ -11,9 +12,11 @@ using Nimbus2025model.Context;
 namespace Nimbus2025model.Migrations
 {
     [DbContext(typeof(Nimbus2025Context))]
-    partial class Nimbus2025ContextModelSnapshot : ModelSnapshot
+    [Migration("20251023075134_UpdateStringLendthCode")]
+    partial class UpdateStringLendthCode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
