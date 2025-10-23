@@ -20,20 +20,23 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
-    private void Ok_Click(object sender, RoutedEventArgs e)
-    {
-        var nom = tbName.Text;
-        tbBienvenue.Text = $"Bienvenue, {nom}!"
-;
-    }
+   
 
     private void Bienvenue_Click(object sender, RoutedEventArgs e)
     {
-
+        var ctrl = new Views.UcBienvenue();
+        MyContent.Content = ctrl;
     }
 
     private void Aeroports_Click(object sender, RoutedEventArgs e)
     {
+        //MessageBox.Show("Aéroports à venir ...");
 
+        //var msg = new Views.Message();
+        //msg.Info.Text = "Bienvenue !";
+        //msg.ShowDialog();
+
+        var ctrl = new Views.UcAeroports();
+        MyContent.Content = ctrl;
     }
 }
