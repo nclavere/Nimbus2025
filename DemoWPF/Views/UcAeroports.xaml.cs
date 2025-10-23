@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DemoWPF.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace DemoWPF.Views
         public UcAeroports()
         {
             InitializeComponent();
+            LoadAeroportsAsync();
+        }
+
+        private async Task LoadAeroportsAsync()
+        {
+            var lst = await HttpClientService.Instance.GetAeroports();
         }
     }
 }

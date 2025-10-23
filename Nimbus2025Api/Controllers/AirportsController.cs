@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Nimbus2025model.Context;
-using Nimbus2025model.Dtos;
 using Nimbus2025model.Entities;
-using Nimbus2025model.Migrations;
+using Nimbus2025Transverse.Dtos;
 
 namespace Nimbus2025Api.Controllers
 {

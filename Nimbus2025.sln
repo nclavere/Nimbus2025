@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nimbus2025Api", "Nimbus2025
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoWPF", "DemoWPF\DemoWPF.csproj", "{FE7FC9FB-533B-48F0-A6F4-CA8767B711F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nimbus2025Transverse", "Nimbus2025Transverse\Nimbus2025Transverse.csproj", "{A12FBC1B-57C4-4882-AF3A-C11F2089BB26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FE7FC9FB-533B-48F0-A6F4-CA8767B711F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE7FC9FB-533B-48F0-A6F4-CA8767B711F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE7FC9FB-533B-48F0-A6F4-CA8767B711F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A12FBC1B-57C4-4882-AF3A-C11F2089BB26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A12FBC1B-57C4-4882-AF3A-C11F2089BB26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A12FBC1B-57C4-4882-AF3A-C11F2089BB26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A12FBC1B-57C4-4882-AF3A-C11F2089BB26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

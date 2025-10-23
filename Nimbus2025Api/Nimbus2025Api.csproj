@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Nimbus2025model\Nimbus2025model.csproj" />
+    <ProjectReference Include="..\Nimbus2025Transverse\Nimbus2025Transverse.csproj" />
   </ItemGroup>
 
 </Project>

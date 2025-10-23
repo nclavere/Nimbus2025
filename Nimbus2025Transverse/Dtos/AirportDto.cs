@@ -1,4 +1,4 @@
-﻿namespace Nimbus2025model.Dtos;
+﻿namespace Nimbus2025Transverse.Dtos;
 public class AirportDto
 {
     public int Id { get; set; }
