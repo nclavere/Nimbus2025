@@ -6,10 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+var connectionString = builder.Configuration.GetConnectionString("Database") ??
+    throw new Exception("Connection string is missing");
 
 builder.Services.AddDbContext<Nimbus2025Context>(opt =>
-    opt.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Nimbus2025;ConnectRetryCount=0"));
+    opt.UseSqlServer(connectionString));
+
+
+builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
