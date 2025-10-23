@@ -24,12 +24,13 @@ namespace DemoWPF.Views
         public UcAeroports()
         {
             InitializeComponent();
-            LoadAeroportsAsync();
+            _ = LoadAeroportsAsync();
         }
 
         private async Task LoadAeroportsAsync()
         {
             var lst = await HttpClientService.Instance.GetAeroports();
+            lstb.ItemsSource = lst;
         }
     }
 }
