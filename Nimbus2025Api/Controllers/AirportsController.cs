@@ -20,11 +20,11 @@ namespace Nimbus2025Api.Controllers
 
         // GET: api/Airports
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AirportDto>>> GetAirports()
+        public async Task<ActionResult<IEnumerable<Object>>> GetAirports()
         {
             return await _context.Airports
                 .Include(a => a.Cities)
-                .Select(a => new AirportDto
+                .Select(a => new
                 {
                     Name = a.Name,
                     Code = a.Code
@@ -32,15 +32,16 @@ namespace Nimbus2025Api.Controllers
                 .ToListAsync();
         }
 
-        // GET: api/AirportsWithCities
+        // GET: api/Airports/Complete
         [HttpGet]
-        [Route("WithCities")]
-        public async Task<ActionResult<IEnumerable<AirportDto>>> GetAirportsWithCities()
+        [Route("Complete")]
+        public async Task<ActionResult<IEnumerable<AirportDto>>> GetAirportsComplete()
         {
             return await _context.Airports
                 .Include(a => a.Cities)
                 .Select(a => new AirportDto
                 {
+                    Id = a.Id,
                     Name = a.Name,
                     Code = a.Code,
                     Cities = a.Cities!.Select(c => c.Name).ToList()
@@ -57,6 +58,7 @@ namespace Nimbus2025Api.Controllers
                 .Where(a => a.Id == id)
                 .Select(a => new AirportDto
                 {
+                    Id = a.Id,
                     Name = a.Name,
                     Code = a.Code,
                     Cities = a.Cities!.Select(c => c.Name).ToList()
@@ -74,14 +76,31 @@ namespace Nimbus2025Api.Controllers
         // PUT: api/Airports/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAirport(int id, Airport airport)
+        public async Task<IActionResult> PutAirport(int id, AirportDto airportdto)
         {
-            if (id != airport.Id)
+
+            var airportdao = _context.Airports.Where(a => a.Id == id).FirstOrDefault();
+            if (airportdao == null)
             {
                 return BadRequest();
             }
 
-            _context.Entry(airport).State = EntityState.Modified;
+            airportdao.Name = airportdto.Name;
+            airportdao.Code = airportdto.Code;
+
+            if (airportdto.Cities != null)
+            {
+                airportdao.Cities = new List<City>();
+
+                foreach (var nameofcity in airportdto.Cities)
+                {
+                    var v = await _context.Cities.Where(c => c.Name == nameofcity).FirstOrDefaultAsync();
+                    if (v != null)
+                    {
+                        airportdao.Cities.Add(v);
+                    }
+                }
+            }
 
             try
             {
@@ -105,13 +124,36 @@ namespace Nimbus2025Api.Controllers
         // POST: api/Airports
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Airport>> PostAirport(Airport airport)
+        public async Task<ActionResult<Airport>> PostAirport(AirportDto airportdto)
         {
-            _context.Airports.Add(airport);
+            var airportdao = new Airport
+            {
+                Name = airportdto.Name,
+                Code = airportdto.Code,
+            };
+
+            if (airportdto.Cities != null)
+            {
+                foreach (var nameofcity in airportdto.Cities)
+                {
+                    var v = await _context.Cities.Where(c => c.Name == nameofcity).FirstOrDefaultAsync();
+                    if (v != null)
+                    {
+                        if(airportdao.Cities == null)
+                        {
+                            airportdao.Cities = new List<City>();
+                        }
+                        airportdao.Cities.Add(v);
+                    }
+                }
+            }
+
+            _context.Airports.Add(airportdao);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAirport", new { id = airport.Id }, airport);
+            return CreatedAtAction("GetAirport", new { id = airportdao.Id }, airportdto);
         }
+
 
         // DELETE: api/Airports/5
         [HttpDelete("{id}")]
