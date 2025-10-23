@@ -1,4 +1,5 @@
 ﻿using DemoWPF.Services;
+using Nimbus2025Transverse.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,12 @@ namespace DemoWPF.Views
         {
             var lst = await HttpClientService.Instance.GetAeroports();
             lstb.ItemsSource = lst;
+        }
+
+        private void lstb_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var item = (AirportDto)lstb.SelectedItem;
+            MessageBox.Show($"Vous avez sélectionné l'aéroport : {item.Name} ({item.Code})", "Aéroport sélectionné", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
