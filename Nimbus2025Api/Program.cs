@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Nimbus2025model.Context;
+using Nimbus2025model.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,5 +29,12 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var ctx = scope.ServiceProvider.GetRequiredService<Nimbus2025Context>();
+    await ctx.Database.MigrateAsync();
+    await SeedService.Seed(ctx);
+}
 
 app.Run();
