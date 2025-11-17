@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Nimbus2025Transverse\Nimbus2025Transverse.csproj" />
   </ItemGroup>
 
