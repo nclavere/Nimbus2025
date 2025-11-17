@@ -1,13 +1,13 @@
 [
   {
-    "Name": "Nouveau profil",
+    "Name": "Nimbus2025.Wpf+API",
     "Projects": [
       {
         "Path": "Nimbus2025Api\\Nimbus2025Api.csproj",
         "Action": "StartWithoutDebugging"
       },
       {
-        "Path": "DemoWPF\\DemoWPF.csproj",
+        "Path": "Nimbus2025Wpf\\Nimbus2025Wpf.csproj",
         "Action": "Start"
       }
     ]

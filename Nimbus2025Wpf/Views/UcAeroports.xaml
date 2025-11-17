@@ -14,7 +14,7 @@
 
         <TextBox ToolTip="Rechercher ..." />
 
-        <ListBox Grid.Row="1"  Margin="0 20 0 0" >
+        <ListBox Grid.Row="1" ItemsSource="{Binding Aeroports}" Margin="0 20 0 0" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

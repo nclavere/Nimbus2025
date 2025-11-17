@@ -30,6 +30,7 @@ namespace Nimbus2025Wpf.ViewModels
         private void AfficherAeroports()
         {
             ControlAffiche = new Views.UcAeroports();
+            ControlAffiche.DataContext = new AeroportsViewModel();
             NotifyPropertyChanged(nameof(ControlAffiche));
         }
 
