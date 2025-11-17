@@ -1,0 +1,23 @@
+﻿<Window x:Class="Nimbus2025Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Style="{StaticResource MaterialDesignWindow}"
+        xmlns:local="clr-namespace:Nimbus2025Wpf"
+        mc:Ignorable="d"
+        Title="Nimbus 2025" Height="450" Width="800" MinHeight="200" MinWidth="500"
+        WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.ColumnSpan="4">
+            <MenuItem Header="Aéroports" Command="{Binding CommandAeroports}" />
+        </Menu>
+
+        <ContentControl Name="MyContent" Grid.Row="1" />
+    </Grid>
+</Window>
