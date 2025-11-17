@@ -11,30 +11,39 @@ namespace Nimbus2025Wpf.ViewModels
     class MainViewModel : ViewModelBase
     {
 
-		public UserControl ControlAffiche { get; set; } = null!;
+        public UserControl ControlAffiche { get; set; } = null!;
 
-        private ICommand commandAeroports = null!;
-		public ICommand CommandAeroports
-		{
-			get 
-			{ 
-				if(commandAeroports == null)
-				{
-					commandAeroports = new RelayCommand(
-                        o =>
-                        {
-                            //corps de la méthode exécutée par la commande
-                            ControlAffiche = new Views.UcAeroports();
-							//instance de la vue model aeroports ...
-                            NotifyPropertyChanged(nameof(ControlAffiche));
-                        });
-                }
 
-				return commandAeroports; 
-			}
-		}
+        public ICommand CommandAeroports { get; set; } = null!;
+        public ICommand CommandVols { get; set; } = null!;
+        public ICommand CommandReservations { get; set; } = null!;
 
-		
 
-	}
+        public MainViewModel()
+        {
+            CommandAeroports = new RelayCommand(o => AfficherAeroports());
+            CommandVols = new RelayCommand(o => AfficherVols());
+            CommandReservations = new RelayCommand(o => AfficherReservations());
+        }
+
+
+        private void AfficherAeroports()
+        {
+            ControlAffiche = new Views.UcAeroports();
+            NotifyPropertyChanged(nameof(ControlAffiche));
+        }
+
+        private void AfficherVols()
+        {
+            ControlAffiche = new Views.UcAeroports();
+            NotifyPropertyChanged(nameof(ControlAffiche));
+        }
+
+        private void AfficherReservations()
+        {
+            ControlAffiche = new Views.UcAeroports();
+            NotifyPropertyChanged(nameof(ControlAffiche));
+        }
+
+    }
 }

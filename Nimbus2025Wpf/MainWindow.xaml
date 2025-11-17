@@ -16,6 +16,8 @@
 
         <Menu Grid.ColumnSpan="4">
             <MenuItem Header="Aéroports" Command="{Binding CommandAeroports}" />
+            <MenuItem Header="Vols" Command="{Binding CommandVols}" />
+            <MenuItem Header="Réservations" Command="{Binding CommandReservations}" />
         </Menu>
 
         <ContentControl Content="{Binding ControlAffiche}" Grid.Row="1" />
