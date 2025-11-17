@@ -18,24 +18,26 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <Label   Grid.Row="1" Grid.Column="1" Content="Nom"  />
         <TextBox Grid.Row="1" Grid.Column="2" MinWidth="200" 
-                 Text="{Binding Nom}"/>
+                 Text="{Binding Nom, UpdateSourceTrigger=PropertyChanged}"/>
+        <CheckBox Grid.Row="2" Grid.Column="2" Name="chk"
+                  Content="Afficher le texte de bienvenue" 
+                  IsChecked="{Binding AfficherTextes, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
-        HorizontalAlignment="Center" Margin="20"
-        Click="Ok_Click">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="SmileyHappyOutline"/>
-                <TextBlock Text="Ok" Margin="5 0 0 0 "/>
-            </StackPanel>
-        </Button>
+        <!--version 1 : avec la vue modele-->
+        <!--<TextBlock Grid.Row="4" Grid.ColumnSpan="4"  Margin="20"
+                   Text="{Binding TexteBienvenue}" HorizontalAlignment="Center"
+                   Visibility="{Binding AfficherTextes, Converter={StaticResource VisibilityConverter}}"/>-->
 
-        <TextBlock Grid.Row="3" Grid.ColumnSpan="4" Name="tbBienvenue"
-   HorizontalAlignment="Center"/>
+        <!--version 2 : avec du binding sur la vue -->
+        <TextBlock Grid.Row="4" Grid.ColumnSpan="4"  Margin="20"
+           Text="{Binding TexteBienvenue}" HorizontalAlignment="Center"
+           Visibility="{Binding IsChecked, ElementName=chk, Converter={StaticResource VisibilityConverter}}"/>
 
     </Grid>
 </UserControl>

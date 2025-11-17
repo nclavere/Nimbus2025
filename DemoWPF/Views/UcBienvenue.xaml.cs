@@ -10,14 +10,7 @@ public partial class UcBienvenue : UserControl
         InitializeComponent();
 
         var person = new Model.Personne();
-        this.DataContext = person;
+        this.DataContext = new ViewModels.PersonneViewModel(person);
     }
 
-    private void Ok_Click(object sender, RoutedEventArgs e)
-    {
-        var person = (Model.Personne)this.DataContext;
-
-        tbBienvenue.Text = $"Bienvenue, {person.Nom}!"
-;
-    }
 }

@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DemoWPF.Model;
 
-    class Personne
-    {
-	private string nom = null!;
-
-	public string Nom
-	{
-		get { return nom; }
-		set { nom = value; }
-	}
-
+class Personne
+{
+    public string Nom { get; set; } = null!;
 
 }
