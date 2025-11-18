@@ -12,7 +12,7 @@ namespace DemoWPF.Services
     abstract class HttpClientBase
     {
         private const string baseAddress = "https://localhost:7069/api/";
-        private HttpClient client;
+        private HttpClient client = null!;
         protected HttpClient Client
         {
             get

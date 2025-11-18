@@ -39,5 +39,17 @@ class HttpClientService: HttpClientBase
         throw new Exception(response.ReasonPhrase);
     }
 
+    public async Task<List<FlightDto>> GetFlights()
+    {
+        string route = $"Flights";
+        var response = await Client.GetAsync(route);
 
+        if (response.IsSuccessStatusCode)
+        {
+            string resultat = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<FlightDto>>(resultat)
+                ?? throw new FormatException($"Erreur Http : {route}");
+        }
+        throw new Exception(response.ReasonPhrase);
+    }
 }

@@ -5,22 +5,22 @@ using System.ComponentModel;
 using System.Windows.Data;
 
 namespace Nimbus2025Wpf.ViewModels;
-internal class AeroportsViewModel : ViewModelBase
+internal class FlightsViewModel : ViewModelBase
 {
 
-    public ObservableCollection<AirportDto> Aeroports { get; set; } = null!;
+    public ObservableCollection<FlightDto> Flights { get; set; } = null!;
     public ICollectionView Observer { get; set; } = null!;
 
-    public string SelectedAeroportDetails { 
+    public string SelectedFlightDetails { 
         get
         {
             return Observer?.CurrentItem != null ? 
                 ((AirportDto)Observer.CurrentItem).Name 
-                : "Aucun aéroport sélectionné";
+                : "Aucun vol sélectionné";
         }
     }
 
-    public AeroportsViewModel()
+    public FlightsViewModel()
     {
         _ = LoadAeroportsAsync();
     }
@@ -28,27 +28,27 @@ internal class AeroportsViewModel : ViewModelBase
     private async Task LoadAeroportsAsync()
     {
         //1. on récupère les données du modèle
-        var aeroports = await HttpClientService.Instance.GetAeroports();
+        var flights = await HttpClientService.Instance.GetFlights();
 
         //2. on les place dans la liste observable
-        Aeroports = new ObservableCollection<AirportDto>(aeroports);
+        Flights = new ObservableCollection<FlightDto>(flights);
+        //Flights.ForEach(a => Flights.Add(a));
 
         //3. on pose un observateur
-        Observer = CollectionViewSource.GetDefaultView(Aeroports);
+        Observer = CollectionViewSource.GetDefaultView(Flights);
 
         Observer.SortDescriptions.Add(
-            new SortDescription(nameof(AirportDto.Code), ListSortDirection.Descending)
+            new SortDescription(nameof(FlightDto.Departure), ListSortDirection.Ascending)
         );
 
         //4. on veut être notifié du changement de sélection coté vue
         Observer.CurrentChanged += (sender, e) =>
         {
-            NotifyPropertyChanged(nameof(SelectedAeroportDetails));
+            NotifyPropertyChanged(nameof(SelectedFlightDetails));
         };        
 
         //5. on notifie la vue que la liste a changé
-        NotifyPropertyChanged(nameof(Aeroports));
-        Observer.MoveCurrentToLast();
+        NotifyPropertyChanged(nameof(Flights));
     }
 
     public string Filtre
@@ -63,8 +63,9 @@ internal class AeroportsViewModel : ViewModelBase
             {
                 Observer.Filter = obj =>
                 {
-                    AirportDto aeroport = (AirportDto)obj;
-                    return aeroport.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase);
+                    FlightDto aeroport = (FlightDto)obj;
+                    return aeroport.AirportTo.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase)
+                    || aeroport.AirportFrom.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase);
                 };
             }
         }
