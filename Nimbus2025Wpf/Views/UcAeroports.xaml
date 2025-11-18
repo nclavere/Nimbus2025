@@ -10,11 +10,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBox ToolTip="Rechercher ..." />
+        <TextBox Text="{Binding Filtre, UpdateSourceTrigger=PropertyChanged}" ToolTip="Rechercher ..." />
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding Aeroports}" Margin="0 20 0 0" >
+        <ListBox Grid.Row="1" ItemsSource="{Binding Aeroports}" Margin="0 20 0 0" 
+                 IsSynchronizedWithCurrentItem="True" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -27,6 +29,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
+        <TextBlock Grid.Row="2" Text="{Binding SelectedAeroportDetails}" Margin="0 20 0 0" />
 
     </Grid>
 </UserControl>
