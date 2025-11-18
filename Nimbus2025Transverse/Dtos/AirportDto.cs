@@ -9,7 +9,7 @@ public class AirportDto
 
     public override string ToString()
     {
-        return Name;
+        return $"{Name} - {Code}";
     }
 
 }

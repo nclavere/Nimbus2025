@@ -13,38 +13,35 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
 
-        <TextBox Text="{Binding Filtre, UpdateSourceTrigger=PropertyChanged}" ToolTip="Rechercher ..." />
-
-        <!-- Entêtes de colonnes -->
-        <!--<StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,0">
-            <TextBlock Text="Compagnie" FontWeight="Bold" Width="120" Margin="10 0 0 0" VerticalAlignment="Center"/>
-            <TextBlock Text="Départ" FontWeight="Bold" Width="120" Margin="10 0 0 0" VerticalAlignment="Center"/>
-            <TextBlock Text="Arrivée" FontWeight="Bold" Width="120" Margin="10 0 0 0" VerticalAlignment="Center"/>
-            <TextBlock Text="Date départ" FontWeight="Bold" Width="120" Margin="10 0 0 0" VerticalAlignment="Center"/>
-            <TextBlock Text="Date arrivée" FontWeight="Bold" Width="120" Margin="10 0 0 0" VerticalAlignment="Center"/>
-        </StackPanel>-->
+        <TextBox Text="{Binding Filtre, UpdateSourceTrigger=PropertyChanged}"  
+                 Margin="20 0 0 0" ToolTip="Rechercher ..."/>
 
         <ListBox Grid.Row="2" ItemsSource="{Binding Flights}" Margin="0 20 0 0" 
                  IsSynchronizedWithCurrentItem="True">
-            
+
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0 10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="8*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding CompagnyName}" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding AirportFrom.Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding AirportTo.Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding CompanyName}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Departure, StringFormat={}{0:dd/MM/yyyy HH:mm}}" VerticalAlignment="Center" />
                         <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Arrival, StringFormat={}{0:dd/MM/yyyy HH:mm}}" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding AirportFrom.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding AirportTo.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -55,5 +52,14 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
+        <DockPanel Grid.Row="2" Grid.Column="1" Visibility="{Binding DetailVisibility}">
+            <Border BorderThickness="1 1 0 0" 
+                    BorderBrush="{StaticResource MaterialDesignDivider}" MinWidth="500"
+                    Background="{StaticResource MaterialDesignDarkSeparatorBackground}"
+                    >
+                <local:UcFlightDetail DataContext="{Binding CurrentFlight}"/>
+            </Border>
+        </DockPanel>
+        
     </Grid>
 </UserControl>

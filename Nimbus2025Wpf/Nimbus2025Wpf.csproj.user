@@ -5,6 +5,9 @@
     <Compile Update="Views\UcAeroports.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\UcFlightDetail.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\UcFlights.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

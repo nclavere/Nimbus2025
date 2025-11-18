@@ -52,4 +52,32 @@ class HttpClientService: HttpClientBase
         }
         throw new Exception(response.ReasonPhrase);
     }
+
+    private async Task<List<ItemDto>> GetParameters(string parameter)
+    {
+        string route = $"Parameters/{parameter}";
+        var response = await Client.GetAsync(route);
+
+        if (response.IsSuccessStatusCode)
+        {
+            string resultat = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<ItemDto>>(resultat)
+                ?? throw new FormatException($"Erreur Http : {route}");
+        }
+        throw new Exception(response.ReasonPhrase);
+    }
+
+    public async Task<List<ItemDto>> GetCompanies()
+    {
+        return await GetParameters("Companies");
+    }   
+    public async Task<List<ItemDto>> GetCities()
+    {
+        return await GetParameters("Cities");
+    }
+
+    internal void SaveFlight(FlightDto flight)
+    {
+        Console.WriteLine("SaveFlight not implemented");
+    }
 }

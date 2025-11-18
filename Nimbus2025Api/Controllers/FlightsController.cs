@@ -37,7 +37,7 @@ namespace Nimbus2025Api.Controllers
                    IsOpen = a.IsOpen,
                    Departure = a.Departure,
                    Arrival = a.Arrival,
-                   CompagnyName = a.Company!.Name,
+                   CompanyName = a.Company!.Name,
                    AirportFrom = new AirportDto
                    {
                        Id = a.AirportFrom!.Id,
@@ -71,7 +71,7 @@ namespace Nimbus2025Api.Controllers
                    IsOpen = a.IsOpen,
                    Departure = a.Departure,
                    Arrival = a.Arrival,
-                   CompagnyName = a.Company!.Name,
+                   CompanyName = a.Company!.Name,
                    AirportFrom = new AirportDto
                    {
                        Id = a.AirportFrom!.Id,

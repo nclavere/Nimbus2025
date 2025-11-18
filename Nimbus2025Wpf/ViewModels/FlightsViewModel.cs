@@ -2,28 +2,28 @@
 using Nimbus2025Wpf.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Data;
 
 namespace Nimbus2025Wpf.ViewModels;
 internal class FlightsViewModel : ViewModelBase
 {
-
-    public ObservableCollection<FlightDto> Flights { get; set; } = null!;
-    public ICollectionView Observer { get; set; } = null!;
-
-    public string SelectedFlightDetails { 
-        get
-        {
-            return Observer?.CurrentItem != null ? 
-                ((AirportDto)Observer.CurrentItem).Name 
-                : "Aucun vol sélectionné";
-        }
-    }
-
     public FlightsViewModel()
     {
         _ = LoadAeroportsAsync();
     }
+
+    //Liste observable des vols 
+    public ObservableCollection<FlightDto> Flights { get; set; } = null!;
+    public ICollectionView Observer { get; set; } = null!;
+    
+    //Le vol en cours de sélection
+    public FlightViewModel? CurrentFlight {
+        get => Observer?.CurrentItem == null ? null :
+            new FlightViewModel((FlightDto?)Observer?.CurrentItem!);
+    }
+    public Visibility DetailVisibility { get => CurrentFlight == null ? Visibility.Collapsed : Visibility.Visible; } 
+       
 
     private async Task LoadAeroportsAsync()
     {
@@ -43,12 +43,16 @@ internal class FlightsViewModel : ViewModelBase
 
         //4. on veut être notifié du changement de sélection coté vue
         Observer.CurrentChanged += (sender, e) =>
-        {
-            NotifyPropertyChanged(nameof(SelectedFlightDetails));
+        {            
+            NotifyPropertyChanged(nameof(CurrentFlight));
+            NotifyPropertyChanged(nameof(DetailVisibility));
         };        
 
         //5. on notifie la vue que la liste a changé
         NotifyPropertyChanged(nameof(Flights));
+
+        //désélectionne par défaut
+        Observer.MoveCurrentTo(null);
     }
 
     public string Filtre
@@ -71,5 +75,7 @@ internal class FlightsViewModel : ViewModelBase
         }
     }
 
+
+    
 
 }

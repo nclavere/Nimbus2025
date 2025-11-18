@@ -6,7 +6,7 @@ public class FlightDto
     public DateTime Departure { get; set; }
     public DateTime Arrival { get; set; }
 
-    public string CompagnyName { get; set; } = null!;
+    public string CompanyName { get; set; } = null!;
 
     public AirportDto AirportFrom { get; set; } = null!;
     public AirportDto AirportTo { get; set; } = null!;
