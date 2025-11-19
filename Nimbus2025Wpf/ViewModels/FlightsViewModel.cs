@@ -4,26 +4,30 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace Nimbus2025Wpf.ViewModels;
 internal class FlightsViewModel : ViewModelBase
 {
     public FlightsViewModel()
     {
+        CommandAjouter = new RelayCommand(o => AjouterUnVol());
         _ = LoadAeroportsAsync();
     }
 
-    //Liste observable des vols 
-    public ObservableCollection<FlightDto> Flights { get; set; } = null!;
+    // Liste observable des vols 
+    // chaque élément est un FlightViewModel qui permet d'ajouter des éléments d'affichage et de manipulation à l'entité dto brute
+    public ObservableCollection<FlightViewModel> Flights { get; set; } = null!;
     public ICollectionView Observer { get; set; } = null!;
     
     //Le vol en cours de sélection
     public FlightViewModel? CurrentFlight {
-        get => Observer?.CurrentItem == null ? null :
-            new FlightViewModel((FlightDto?)Observer?.CurrentItem!);
+        get => Observer?.CurrentItem == null ? null : (FlightViewModel?)Observer?.CurrentItem!;
     }
-    public Visibility DetailVisibility { get => CurrentFlight == null ? Visibility.Collapsed : Visibility.Visible; } 
-       
+    public Visibility DetailVisibility { get => CurrentFlight == null ? Visibility.Collapsed : Visibility.Visible; }
+
+    //Commande d'ajout d'un vol
+    public ICommand CommandAjouter { get; set; } = null!;
 
     private async Task LoadAeroportsAsync()
     {
@@ -31,8 +35,8 @@ internal class FlightsViewModel : ViewModelBase
         var flights = await HttpClientService.Instance.GetFlights();
 
         //2. on les place dans la liste observable
-        Flights = new ObservableCollection<FlightDto>(flights);
-        //Flights.ForEach(a => Flights.Add(a));
+        Flights = new ObservableCollection<FlightViewModel>();
+        flights.ForEach(a => Flights.Add(new FlightViewModel(a)));
 
         //3. on pose un observateur
         Observer = CollectionViewSource.GetDefaultView(Flights);
@@ -67,15 +71,26 @@ internal class FlightsViewModel : ViewModelBase
             {
                 Observer.Filter = obj =>
                 {
-                    FlightDto aeroport = (FlightDto)obj;
-                    return aeroport.AirportTo.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase)
-                    || aeroport.AirportFrom.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase);
+                    FlightViewModel aeroport = (FlightViewModel)obj;
+                    return aeroport.Flight.AirportTo.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase)
+                    || aeroport.Flight.AirportFrom.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase);
                 };
             }
         }
     }
 
+    private void AjouterUnVol()
+    {
+        //création d'un nouveau vol vide
+        var vol = new FlightDto();
 
-    
+        //ajout à la fin de la liste observable
+        var vm = new FlightViewModel(vol);
+        Flights.Add(vm);
+
+        //on se met sur le l'élément ajouté pour le montrer à l'utilisateur
+        Observer.MoveCurrentTo(vm);
+    }
+
 
 }

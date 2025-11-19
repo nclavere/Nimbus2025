@@ -24,6 +24,17 @@ class HttpClientService: HttpClientBase
     }
     #endregion
 
+    public List<AirportDto> Airports { get; set; } = null!;
+    public List<ItemDto> Companies { get; set; } = null!;
+    public List<ItemDto> Cities { get; set; } = null!;
+
+    public async Task LoadParameters()
+    {
+        Airports = await HttpClientService.Instance.GetAeroports();
+        Companies = await HttpClientService.Instance.GetCompanies();
+        Cities = await HttpClientService.Instance.GetCities();
+    }
+
 
     public async Task<List<AirportDto>> GetAeroports()
     {
@@ -78,6 +89,14 @@ class HttpClientService: HttpClientBase
 
     internal void SaveFlight(FlightDto flight)
     {
-        Console.WriteLine("SaveFlight not implemented");
+        if(flight.Id == 0)
+        {
+            Console.WriteLine("Création d'un vol -> appel POST");
+        }
+        else
+        {
+            Console.WriteLine("Modification d'un vol -> appel PUT");
+        }
+        
     }
 }

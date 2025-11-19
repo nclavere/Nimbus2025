@@ -19,7 +19,9 @@
         </Grid.ColumnDefinitions>
 
         <TextBox Text="{Binding Filtre, UpdateSourceTrigger=PropertyChanged}"  
-                 Margin="20 0 0 0" ToolTip="Rechercher ..."/>
+                 Margin="20 0 110 0" ToolTip="Rechercher ..."/>
+        <Button Content="Ajouter" HorizontalAlignment="Right" Width="100"
+                Command="{Binding CommandAjouter}"/>
 
         <ListBox Grid.Row="2" ItemsSource="{Binding Flights}" Margin="0 20 0 0" 
                  IsSynchronizedWithCurrentItem="True">
@@ -29,18 +31,18 @@
                     <Grid Margin="0 10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="140" />
                             <ColumnDefinition Width="8*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding CompanyName}" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Departure, StringFormat={}{0:dd/MM/yyyy HH:mm}}" VerticalAlignment="Center" />
-                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Arrival, StringFormat={}{0:dd/MM/yyyy HH:mm}}" VerticalAlignment="Center" />
-                        <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding AirportFrom.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding AirportTo.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Flight.CompanyName}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Flight.Departure, StringFormat={}{0:dd/MM/yyyy HH:mm}}" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Flight.Arrival, StringFormat={}{0:dd/MM/yyyy HH:mm}}" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Flight.AirportFrom.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Flight.AirportTo.Name}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
                     </Grid>
                 </DataTemplate>

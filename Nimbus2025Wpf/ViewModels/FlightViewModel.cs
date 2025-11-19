@@ -12,17 +12,17 @@ internal class FlightViewModel : ViewModelBase
     {
         Flight = flight;
         CommandEnregistrer = new RelayCommand(o => Enregistrer());
-        _ = LoadParameters();
     }
 
-    public List<AirportDto> Airports { get; set; } = null!;
-    public List<ItemDto> Companies { get; set; } = null!;
-    public List<ItemDto> Cities { get; set; } = null!;
+    //Pour fournir les listes déroulantes
+    public List<AirportDto> Airports { get => HttpClientService.Instance.Airports; }
+    public List<ItemDto> Companies { get => HttpClientService.Instance.Companies; }
+    public List<ItemDto> Cities { get => HttpClientService.Instance.Cities; }
 
-
+    //Pour fournir les éléments sélectionnés des listes déroulantes
     public ItemDto? Company
     {
-        get { return Companies?.FirstOrDefault(c => c.Name == Flight.CompanyName); }
+        get { return HttpClientService.Instance.Companies?.FirstOrDefault(c => c.Name == Flight.CompanyName); }
         set { 
             if(value != null)
             {
@@ -34,7 +34,7 @@ internal class FlightViewModel : ViewModelBase
 
     public AirportDto? AirportFrom
     {
-        get { return Airports?.FirstOrDefault(c => c.Name == Flight.AirportFrom.Name); }
+        get { return HttpClientService.Instance.Airports?.FirstOrDefault(c => c.Name == Flight.AirportFrom?.Name); }
         set
         {
             if (value != null)
@@ -47,7 +47,7 @@ internal class FlightViewModel : ViewModelBase
 
     public AirportDto? AirportTo
     {
-        get { return Airports?.FirstOrDefault(c => c.Name == Flight.AirportTo.Name); }
+        get { return HttpClientService.Instance.Airports?.FirstOrDefault(c => c.Name == Flight.AirportTo?.Name); }
         set
         {
             if (value != null)
@@ -56,20 +56,6 @@ internal class FlightViewModel : ViewModelBase
                 NotifyPropertyChanged(nameof(AirportTo));
             }
         }
-    }
-
-
-    public async Task LoadParameters()
-    {
-        Airports = await HttpClientService.Instance.GetAeroports();
-        Companies = await HttpClientService.Instance.GetCompanies();        
-        Cities = await HttpClientService.Instance.GetCities();
-        NotifyPropertyChanged(nameof(Companies));
-        NotifyPropertyChanged(nameof(Airports));
-        NotifyPropertyChanged(nameof(Cities));
-        NotifyPropertyChanged(nameof(Company));
-        NotifyPropertyChanged(nameof(AirportFrom));
-        NotifyPropertyChanged(nameof(AirportTo));
     }
 
 
